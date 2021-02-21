@@ -953,8 +953,9 @@ def hex13_to_8192words4(h13):
     base_8192_digits = digits(h13_int, 8192)
     return ''.join(list(map(lambda x: WORDS_8192[x], base_8192_digits)))
 
-pwd = getpass.getpass() account = input('account: ') d =
-hash_hex13('{}:{}'.format('dummy', pwd))
+pwd = getpass.getpass() 
+account = input('account: ') 
+d = hash_hex13('{}:{}'.format('dummy', pwd))
 h = hash_hex13('{}:{}'.format(account, pwd))
 print(hex13_to_8192words4(d))
 print(hex13_to_8192words4(h))
