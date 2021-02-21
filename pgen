@@ -2,30 +2,7 @@
 import getpass 
 import hashlib
 
-def hash_hex13(s):
-    m = hashlib.sha256()
-    m.update(s.encode('utf-8'))
-    return m.digest().hex()[0:13]
-
-def digits(x, b):
-    digits = []
-    #we built the list of digits starting with the least significant
-    while True:
-        m, r = divmod(x, b)
-        digits.append(r)
-        if m == 0:
-            break
-        else:
-            x = m
-    digits.reverse()
-    return digits 
-
-def hex13_to_8192words4(h13):
-    h13_int = int(h13, 16)
-    base_8192_digits = digits(h13_int, 8192)
-    return ''.join(list(map(lambda x: words_8192[x], base_8192_digits)))
-
-words_8192 = [ 'Aaron', 'Aback', 'Abacus', 'Abaft', 'Abase', 'Abased', 'Abash',
+WORDS_8192 = [ 'Aaron', 'Aback', 'Abacus', 'Abaft', 'Abase', 'Abased', 'Abash',
 'Abate', 'Abated', 'Abates', 'Abbe', 'Abbess', 'Abbey', 'Abbeys', 'Abbot',
 'Abbots', 'Abduct', 'Abe', 'Abeam', 'Abel', 'Abele', 'Abet', 'Abets', 'Abhor',
 'Abhors', 'Abide', 'Abided', 'Abides', 'Abies', 'Abject', 'Abjure', 'Ablate',
@@ -952,6 +929,29 @@ words_8192 = [ 'Aaron', 'Aback', 'Abacus', 'Abaft', 'Abase', 'Abased', 'Abash',
 'Zesty', 'Zeta', 'Zeus', 'Zig', 'Zinc', 'Zion', 'Zip', 'Zippy', 'Zips', 'Zombi',
 'Zonal', 'Zone', 'Zoned', 'Zones', 'Zoo', 'Zoom', 'Zooms', 'Zoos', 'Zulu',
 'Zulus']
+
+def hash_hex13(s):
+    m = hashlib.sha256()
+    m.update(s.encode('utf-8'))
+    return m.digest().hex()[0:13]
+
+def digits(x, b):
+    digits = []
+    #we built the list of digits starting with the least significant
+    while True:
+        m, r = divmod(x, b)
+        digits.append(r)
+        if m == 0:
+            break
+        else:
+            x = m
+    digits.reverse()
+    return digits 
+
+def hex13_to_8192words4(h13):
+    h13_int = int(h13, 16)
+    base_8192_digits = digits(h13_int, 8192)
+    return ''.join(list(map(lambda x: WORDS_8192[x], base_8192_digits)))
 
 pwd = getpass.getpass() account = input('account: ') d =
 hash_hex13('{}:{}'.format('dummy', pwd))
